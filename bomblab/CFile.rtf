@@ -1,0 +1,337 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1347\cocoasubrtf570
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 0000000000401a34 <explode_bomb>\
+\
+void phase_1(string input)\{\
+	esi = 0x4a5930;\
+	answer = strings_not_equal(input,esi);\
+	if(answer == 0)\
+		return;\
+	explode_bomb();\
+	return;\
+\}\
+\
+strings_not_equal(string input, int esi)\{ \\\\esi = 0x4a5930\
+	rbx = input;\
+	rbp = esi;\
+	eax = string_length();\
+	r12 = eax;\\\\ r12 = length of input\
+	rdi = esi; \\\\rdi = 0x4a5930\
+	eax = length(rdi); \\\\length of 0x4a5930	\
+	edx = 0x1;\
+	if(r12 != eax)\{ \\\\0x4a5930 length - input length\
+		eax = edx; \\\\answer = 1\
+	\}\\\\ if length is not the same, bomb!\
+	eax = *input;\
+	while(al != 0)\{\
+		if(al != *rbp)\}\
+			edx = 0x1;\
+			eax = edx;\\\\answer == 1\
+		\}\
+		rbx = rbx + 1;\
+		rbp = rbp + 1;\
+		eax = *rbx;\
+	\}\
+	edx = 0;\
+	eax = 0;\
+	\
+	\
+	\
+	\
+\}\
+\
+int string_length(string input)\{\
+	answer = 0;\
+	while(* input != 0)\{\
+		input = input + 1;\
+		answer = answer + 1;\
+	\}\
+	return answer;\
+\}\
+\
+int phase_2(char * input)\{\\\\rdi = input\
+	rdi = input;\
+	rsp = rsp - 0x20;\
+	rsi = rsp;\
+	rax = read_six_numbers(rdi,rsi);\
+	if(*rsp == 0)\{\
+		if(*(rsp + 4) != 1)\
+			bomb();\
+		else\{\
+			ebx = 2;\
+			if(ebx > 5)\
+				return;\
+			\
+		\}\
+	\}\
+\}\
+\
+int read_six_numbers(char * rdi,int rsi)\{\\\\ rdi = input, rsi = rsp\
+	rsp = rsp - 0x18;\
+	rdx = rsi;\
+	rsi = rsi + 0x14;\
+	rax = rdx + 0x10;\
+	rcx = rdx + 0x4;\
+	*(rsp + 0x8) = rsi;\
+	*rsp = rax;\
+	r9 = *(rdx + 0xc);\
+	r8 = *(rdx + 0x8);\
+	rsi = 0x4a5c8a;\
+	eax = 0;\
+	isoc99_sscanf();\
+	if(rax > 5)\
+		rsp = rsp + 0x18;return rax;\
+	bomb();\
+	\
+\}\
+\
+\
+void phase_3(char * rdi)\{\
+	rsp = rsp - 0x18;\
+	rcx = rsp + 0xc;\
+	rdx = rsp + 0x8;\
+	rsi = 0x4a5c96;\
+	rax = 0;\
+	scanf();\
+	if(rax <= 1)\
+		bomb();\
+	if ( *(rsp + 8) > 7)\
+		bomb();\
+	rax = *(rsp + 8);\
+	\
+		\
+	\
+\}\
+\
+\
+void phase_4 (char * rdi)\{\
+	rsp = rsp - 0x18;\
+	rcx = rsp + 0xc;\
+	rdx = rsp + 0x8;\
+	rsi = 0x4a5c96;\
+	rax = 0;\
+	scanf();\
+	if (eax != 0x2) \\\\two inputs\
+		bomb();\
+	rax = *(rsp + 8);\\\\input1\
+	if(eax & eax != 1xxxxxx)\{\
+		if(eax > 0xe) \\\\input > 14\
+			bomb();\
+		edx = 0xe;\
+		esi = 0;\
+		edi = *(rsp + 8);\
+		rax = func4(edi,esi);\\\\input1, 0 , edx = 0xe\
+		if(eax != 7)\\\\after recursive, return 7\
+			bomb();\
+		if(*(rsp + 0xc) != 7)\\\\input2 = 7\
+			bomb();\
+		else\
+			return;\
+	\}\
+	else bomb();\
+\}\
+\
+\
+int func4(int rdi, int rsi)\{\
+	rsp = rsp - 8;\
+	eax = edx;\\\\14\
+	eax = eax - esi;\\\\14\
+	ecx = eax;\\\\14\
+	ecx = ecx >> 31;\\\\0\
+	eax = eax + ecx;\\\\14\
+	eax = eax >> 1;\\\\7\
+	ecx = rax + rsi;//7\
+	if(ecx > edi)\{\\
+\b \\input < ecx
+\b0 \
+		edx = rcx - 1;\\\\6\
+		rax = func4(rdi,rsi);\\\\input1, 0, 13\
+		eax = 2 * eax;\
+		return rax;\
+		\
+	\}\
+	else\{
+\b \\\\input >= ecx
+\b0 \
+		eax = 0;\
+		if(ecx < edi)
+\b \\\\input > ecx
+\b0 \
+			esi = rcx + 1;\
+			rax = func4(rdi,rsi);\\\\input1,\
+			eax = rax + rax + 1;\
+			return rax;\
+		else
+\b \\\\ input = ecx
+\b0 \
+			return rax;\
+	\}\
+\
+	\
+\}\
+\
+\
+void phase_5(char *rdi)\{\
+	rbx = rdi;\
+	rax = string_length();\\\\length\
+	if(eax != 0x6)\
+		bomb();\
+	edx = 0;\
+	eax = 0;\
+	while(eax <= 5)\{\
+		rcx = eax;\
+		ecx = *(rbx + rcx);\
+		ecx = ecx & 0xf;\
+		edx = edx + (0x4a59e0 + rcx * 4);\
+		eax = eax + 1;\
+		\
+	\}\
+	if(edx == 0x24)\
+		return;\
+	bomb();	\
+	\
+\}\
+\
+\
+void phase_6(char *rdi)\{\
+	rsp = rsp - 0x50;\
+	rsi = rsp;\
+	read_six_numbers();\
+	ebp = 0;\
+	while(ebp <= 5)\{\
+		rax = ebp;\
+		eax = *(rsp + rax * 4);\
+		eax = eax - 0x1;\
+		if(eax > 0x5)\
+			bomb();\
+		r12 = rbp + 1;\
+		ebx = r12;\
+		rbp = ebp;\
+		while(ebx <= 5)\{\
+			rax = ebx;\
+			eax = *(rsp + rax * 4);\
+			if(*(rsp + rbp * 4) == eax)\
+				bomb();\
+			ebx = ebx + 1;\
+		\}\
+		ebp = r12;\
+	\}\
+	esi = 0;\
+	while(esi <= 5)\{\
+		eax = 1;\
+		edx = 0x6d42a0;\
+		rcx = esi;\
+		while(*(rsp + rcx * 4) > eax)\{\
+			rdx = *(rdx + 8);\
+			eax = eax + 1;\
+		\}\
+		rax = esi;\
+		*(0x20 + rsp + rax * 8) = rdx;\
+		esi ++;\
+			\
+	\}\
+	rbx = *(rsp + 0x20);\
+	rcx = rbx;\
+	eax = 1;\
+	while(eax <= 5)\{\
+		rdx = eax;\
+		rdx = *(0x20 + rsp + rdx * 8);\
+		*(rcx + 8) = rdx;\
+		eax++;\
+		rcx = rdx;\
+	\}\
+	*(rcx + 0x8) = 0;\
+	ebp = 0;\
+	while(ebp <=4)\{  \\\\ former is bigger than latter\
+		rax = *(rbx + 0x8);\
+		if(*(rbx) < eax)\
+			bomb();\
+		rbx = *(rbx + 0x8);\
+		ebp++;\
+	\}\
+	return;\
+\}\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs22 \cf0 \CocoaLigature0 00000000006d42a0 <node1>:\
+  6d42a0:	79 02                	jns    6d42a4 <node1+0x4>\
+  6d42a2:	00 00                	add    %al,(%rax)\
+  6d42a4:	01 00                	add    %eax,(%rax)\
+  6d42a6:	00 00                	add    %al,(%rax)\
+  6d42a8:	b0 42                	mov    $0x42,%al\
+  6d42aa:	6d                   	insl   (%dx),%es:(%rdi)\
+  6d42ab:	00 00                	add    %al,(%rax)\
+  6d42ad:	00 00                	add    %al,(%rax)\
+	...\
+\
+00000000006d42b0 <node2>:\
+  6d42b0:	8f 03                	popq   (%rbx)\
+  6d42b2:	00 00                	add    %al,(%rax)\
+  6d42b4:	02 00                	add    (%rax),%al\
+  6d42b6:	00 00                	add    %al,(%rax)\
+  6d42b8:	c0 42 6d 00          	rolb   $0x0,0x6d(%rdx)\
+  6d42bc:	00 00                	add    %al,(%rax)\
+	...\
+\
+00000000006d42c0 <node3>:\
+  6d42c0:	71 03                	jno    6d42c5 <node3+0x5>\
+  6d42c2:	00 00                	add    %al,(%rax)\
+  6d42c4:	03 00                	add    (%rax),%eax\
+  6d42c6:	00 00                	add    %al,(%rax)\
+  6d42c8:	d0 42 6d             	rolb   0x6d(%rdx)\
+  6d42cb:	00 00                	add    %al,(%rax)\
+  6d42cd:	00 00                	add    %al,(%rax)\
+	...\
+\
+00000000006d42d0 <node4>:\
+  6d42d0:	72 01                	jb     6d42d3 <node4+0x3>\
+  6d42d2:	00 00                	add    %al,(%rax)\
+  6d42d4:	04 00                	add    $0x0,%al\
+  6d42d6:	00 00                	add    %al,(%rax)\
+  6d42d8:	e0 42                	loopne 6d431c <lab+0x1c>\
+  6d42da:	6d                   	insl   (%dx),%es:(%rdi)\
+  6d42db:	00 00                	add    %al,(%rax)\
+  6d42dd:	00 00                	add    %al,(%rax)\
+	...\
+\
+00000000006d42e0 <node5>:\
+  6d42e0:	85 02                	test   %eax,(%rdx)\
+  6d42e2:	00 00                	add    %al,(%rax)\
+  6d42e4:	05 00 00 00 f0       	add    $0xf0000000,%eax\
+  6d42e9:	42 6d                	rex.X insl (%dx),%es:(%rdi)\
+  6d42eb:	00 00                	add    %al,(%rax)\
+  6d42ed:	00 00                	add    %al,(%rax)\
+	...\
+\
+00000000006d42f0 <node6>:\
+  6d42f0:	9c                   	pushfq \
+  6d42f1:	02 00                	add    (%rax),%al\
+  6d42f3:	00 06                	add    %al,(%rsi)
+\f0\fs24 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}
