@@ -1,0 +1,61 @@
+for (j = 0; j < M; j+=8) {
+            for (i = 0; i < N; i+=8) {
+                for (b_i = i; b_i < i+4; b_i++) {
+                    //for each 1x8 cache line of the upper small blocks of A
+                    temp = A[b_i][j];
+                    tmp1 = A[b_i][j+1];
+                    tmp2 = A[b_i][j+2];
+                    tmp3 = A[b_i][j+3];
+                    tmp4 = A[b_i][j+4];
+                    tmp5 = A[b_i][j+5];
+                    tmp6 = A[b_i][j+6];
+                    tmp7 = A[b_i][j+7];
+                    
+                    //transpose the upper small blocks to B (upper right as temporary storage)
+                    B[j][b_i] = temp;
+                    B[j+1][b_i] = tmp1;
+                    B[j+2][b_i] = tmp2;
+                    B[j+3][b_i] = tmp3;
+                    B[j][b_i+4] = tmp4;
+                    B[j+1][b_i+4] = tmp5;
+                    B[j+2][b_i+4] = tmp6;
+                    B[j+3][b_i+4] = tmp7;
+                }
+                for (b_i = j+4; b_i < j+8; b_i++) {
+                    temp = B[b_i-4][i+4];
+                    tmp1 = B[b_i-4][i+5];
+                    tmp2 = B[b_i-4][i+6];
+                    tmp3 = B[b_i-4][i+7];
+                    
+                    //bottom left (1, 0) of A to upper right (0, 1) of B
+                    tmp4 = A[i+4][b_i-4];
+                    tmp5 = A[i+5][b_i-4];
+                    tmp6 = A[i+6][b_i-4];
+                    tmp7 = A[i+7][b_i-4];
+                    
+                    B[b_i-4][i+4] = tmp4;
+                    B[b_i-4][i+5] = tmp5;
+                    B[b_i-4][i+6] = tmp6;
+                    B[b_i-4][i+7] = tmp7;
+                    
+                    //temporary storage to the right place
+                    B[b_i][i] = temp;
+                    B[b_i][i+1] = tmp1;
+                    B[b_i][i+2] = tmp2;
+                    B[b_i][i+3] = tmp3;
+                    
+                    //bottom right (1, 1) of A to the bottom right (1, 1) of B
+                    tmp4 = A[i+4][b_i];
+                    tmp5 = A[i+5][b_i];
+                    tmp6 = A[i+6][b_i];
+                    tmp7 = A[i+7][b_i];
+                    B[b_i][i+4] = tmp4;
+                    B[b_i][i+5] = tmp5;
+                    B[b_i][i+6] = tmp6;
+                    B[b_i][i+7] = tmp7;
+                    
+                    
+                    
+                }
+            }
+        }
